@@ -6,7 +6,7 @@ import omit = require('lodash/omit')
 // PropTypes is a circular reference and therefore not defined in types
 import { PropTypes as NamedPT } from 'prop-types'
 // @ts-ignore: "No exported module" error
-import { PropTypesExtra as NamedPTX } from 'prop-types-extra'
+import * as NamedPTX from 'prop-types-extra'
 // import * as NamedPT from 'prop-types'
 import {
   IntrospectivePropTypes as NamedIPT,
