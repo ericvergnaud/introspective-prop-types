@@ -1,4 +1,7 @@
+import { PropTypes, PropTypesExtra } from '../src/index'
 import IntrospectivePropTypesExtra from '../src/introspective-prop-types-extra'
+// @ts-ignore
+import SomeWidget from "./some-widget"
 
 function check(
   type: string,
@@ -61,3 +64,13 @@ describe('deprecated', () => check('deprecated', function fn() {}))
 
 describe('isRequiredForA11y', () =>
   check('isRequiredForA11y', [function fn() {}]))
+
+const secret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
+
+it('supports unchained propTypes', () => {
+  const propType = PropTypesExtra.deprecated(PropTypes.bool, "just a test")
+  propType({ show: true }, "show", "SomeWidget", "stuff in your code", "show", secret);
+  propType({ }, "show", "SomeWidget", "stuff in your code", "show", secret);
+  propType.isRequired({ show: true }, "show", "SomeWidget", "stuff in your code", "show", secret);
+  propType.isRequired({ }, "show", "SomeWidget", "stuff in your code", "show", secret);
+})

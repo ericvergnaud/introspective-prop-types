@@ -1,3 +1,5 @@
+// copied from react prop-types
+
 export default function createChainableTypeChecker(validate: any) {
   function checkType(
     isRequired: boolean,

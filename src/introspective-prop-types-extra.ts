@@ -35,14 +35,6 @@ function wrapPropTypeExtra<T extends PropTypesExtra>(
   name: Types,
 ): T
 function wrapPropTypeExtra(propType: any, name: any): any {
-  if (
-    name === 'PropTypesExtra' ||
-    name === 'checkPropTypes' ||
-    name === 'resetWarningCache' ||
-    name === 'nominalTypeHack'
-  ) {
-    return propType
-  }
   if (propType.isRequired !== undefined) {
     // Simple type. Just extend the object.
     let res = addType(propType, name)
@@ -59,10 +51,12 @@ function wrapPropTypeExtra(propType: any, name: any): any {
         res = addType(res, name)
       } catch (e) {
         // exception is raised when validator is a pure function
+        /* istanbul ignore else */
         if (e.message === 'Object.defineProperty called on non-object') {
           res = createChainableTypeChecker(res)
           res = addType(res, name)
-        } else throw e
+        } else
+            throw e
       }
       res = addArg(res, arg)
       res = addRequired(res)
