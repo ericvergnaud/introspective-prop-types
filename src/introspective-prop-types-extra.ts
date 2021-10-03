@@ -55,8 +55,7 @@ function wrapPropTypeExtra(propType: any, name: any): any {
         if (e.message === 'Object.defineProperty called on non-object') {
           res = createChainableTypeChecker(res)
           res = addType(res, name)
-        } else
-            throw e
+        } else throw e
       }
       res = addArg(res, arg)
       res = addRequired(res)
